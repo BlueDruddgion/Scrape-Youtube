@@ -54,8 +54,8 @@ def run(query):
     n = int(input('Choose one link to open in Google Chrome: '))
     link = x[n].find_element_by_xpath('.//*[@id="thumbnail"]').get_attribute('href')
     # # # Just open in Google Chrome
-    # chrome_path = 'open -a /Applications/Google\ Chrome.app %s'
-    chrome_path = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s'
+    chrome_path = 'open -a /Applications/Google\ Chrome.app %s'
+    # chrome_path = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s'
     webbrowser.get(chrome_path).open(link)
 
     # Wants to download? Uncomment the code below :))
