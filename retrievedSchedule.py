@@ -9,20 +9,26 @@ import hashlib
 
 retrieve_url = 'http://tkbkmavnteam.tk'
 path = os.path.dirname(os.path.realpath(__file__))
+download_path = path + '/downloads'
+
+before = os.listdir(download_path)
 
 options = Options()
 options.add_experimental_option('prefs', {
-    'download.default_directory': path,
+    'download.default_directory': download_path,
     'download.prompt_for_download': False,
     'safebrowsing.enabled': False,
     'download.directory_upgrade': True,
     'safebrowsing_for_trusted_sources_enabled': False
 })
 
-username = 'CT020115'
-f = open('password.txt', 'r')
-password = f.readline()
-f.close()
+# username = 'CT020115'
+# f = open('password.txt', 'r')
+# password = f.readline()
+# f.close()
+
+username = str(input('Enter your studentID: '))
+password = str(input('Enter your password: '))
 
 driver = webdriver.Chrome(executable_path='{}/chromedriver'.format(path), options=options)
 driver.get(retrieve_url)
@@ -73,8 +79,15 @@ file_download_formatter.click()
 
 driver.close()
 
+after = os.listdir(download_path)
+change = set(after) - set(before)
+filename = None
+if len(change) == 1:
+    filename = change.pop()
+
 # convert HTML file to Dictionary
-f = open('TKBKMAVN-guest.html')
+html_file = download_path + '/' + filename
+f = open(html_file, 'r')
 content = f.read()
 f.close()
 
